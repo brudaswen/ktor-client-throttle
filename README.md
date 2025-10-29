@@ -28,6 +28,18 @@ implementation("de.brudaswen.ktor.client.throttle:ktor-client-throttle:1.0.0")
 
 ## Usage
 
+```kotlin
+HttpClient {
+    install(HttpRequestThrottle) {
+        throttler(
+            limit = 10,
+            refillPeriod = 30.seconds,
+            retry = true,
+        )
+    }
+}
+```
+
 ## License
 
 ```
