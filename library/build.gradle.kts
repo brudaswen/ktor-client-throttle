@@ -12,10 +12,6 @@ plugins {
     signing
 }
 
-dependencies {
-    commonTestImplementation(kotlin("test"))
-}
-
 kotlin {
     jvm()
     iosArm64()
@@ -35,6 +31,17 @@ kotlin {
     }
 
     compilerOptions {
+        optIn.add("kotlin.time.ExperimentalTime")
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.ktor.client.core)
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
     }
 }
 
