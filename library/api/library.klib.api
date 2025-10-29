@@ -1,0 +1,26 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, macosArm64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <de.brudaswen.ktor.client.throttle:library>
+abstract interface de.brudaswen.ktor.client.throttle/HttpRequestThrottler { // de.brudaswen.ktor.client.throttle/HttpRequestThrottler|null[0]
+    abstract suspend fun onResponse(io.ktor.client.statement/HttpResponse): kotlin/Boolean // de.brudaswen.ktor.client.throttle/HttpRequestThrottler.onResponse|onResponse(io.ktor.client.statement.HttpResponse){}[0]
+    abstract suspend fun throttle(io.ktor.client.request/HttpRequestBuilder) // de.brudaswen.ktor.client.throttle/HttpRequestThrottler.throttle|throttle(io.ktor.client.request.HttpRequestBuilder){}[0]
+}
+
+final class de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig { // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig|null[0]
+    constructor <init>() // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig.<init>|<init>(){}[0]
+
+    final var throttler // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig.throttler|{}throttler[0]
+        final fun <get-throttler>(): de.brudaswen.ktor.client.throttle/HttpRequestThrottler // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig.throttler.<get-throttler>|<get-throttler>(){}[0]
+        final fun <set-throttler>(de.brudaswen.ktor.client.throttle/HttpRequestThrottler) // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig.throttler.<set-throttler>|<set-throttler>(de.brudaswen.ktor.client.throttle.HttpRequestThrottler){}[0]
+
+    final fun throttler(kotlin/Boolean = ...) // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig.throttler|throttler(kotlin.Boolean){}[0]
+    final fun throttler(kotlin/Int, kotlin.time/Duration, kotlin/Boolean = ...) // de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig.throttler|throttler(kotlin.Int;kotlin.time.Duration;kotlin.Boolean){}[0]
+}
+
+final val de.brudaswen.ktor.client.throttle/HttpRequestThrottle // de.brudaswen.ktor.client.throttle/HttpRequestThrottle|{}HttpRequestThrottle[0]
+    final fun <get-HttpRequestThrottle>(): io.ktor.client.plugins.api/ClientPlugin<de.brudaswen.ktor.client.throttle/HttpRequestThrottleConfig> // de.brudaswen.ktor.client.throttle/HttpRequestThrottle.<get-HttpRequestThrottle>|<get-HttpRequestThrottle>(){}[0]

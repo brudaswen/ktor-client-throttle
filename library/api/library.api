@@ -1,0 +1,19 @@
+public final class de/brudaswen/ktor/client/throttle/HttpRequestThrottleConfig {
+	public fun <init> ()V
+	public final fun getThrottler ()Lde/brudaswen/ktor/client/throttle/HttpRequestThrottler;
+	public final fun setThrottler (Lde/brudaswen/ktor/client/throttle/HttpRequestThrottler;)V
+	public final fun throttler (Z)V
+	public static synthetic fun throttler$default (Lde/brudaswen/ktor/client/throttle/HttpRequestThrottleConfig;ZILjava/lang/Object;)V
+	public final fun throttler-8Mi8wO0 (IJZ)V
+	public static synthetic fun throttler-8Mi8wO0$default (Lde/brudaswen/ktor/client/throttle/HttpRequestThrottleConfig;IJZILjava/lang/Object;)V
+}
+
+public final class de/brudaswen/ktor/client/throttle/HttpRequestThrottleKt {
+	public static final fun getHttpRequestThrottle ()Lio/ktor/client/plugins/api/ClientPlugin;
+}
+
+public abstract interface class de/brudaswen/ktor/client/throttle/HttpRequestThrottler {
+	public abstract fun onResponse (Lio/ktor/client/statement/HttpResponse;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun throttle (Lio/ktor/client/request/HttpRequestBuilder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
