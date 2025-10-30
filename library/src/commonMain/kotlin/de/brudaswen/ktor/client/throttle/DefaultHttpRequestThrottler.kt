@@ -2,7 +2,9 @@ package de.brudaswen.ktor.client.throttle
 
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.request
 import io.ktor.http.HttpStatusCode.Companion.TooManyRequests
+import io.ktor.util.AttributeKey
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -46,6 +48,8 @@ internal class DefaultHttpRequestThrottler(
 
                     // Refill bucket if reset time has passed
                     reset = Clock.System.now() + refillPeriod
+                    request.attributes.put(ResetAttribute, reset)
+
                     remaining = limit
                 }
 
@@ -55,8 +59,16 @@ internal class DefaultHttpRequestThrottler(
         }
     }
 
-    override suspend fun onResponse(response: HttpResponse): Boolean =
-        retry && response.shouldRetry()
+    override suspend fun onResponse(response: HttpResponse): Boolean {
+        if (response.request.attributes.getOrNull(ResetAttribute) == reset) {
+            // If this was the request that started this bucket, we update the
+            // reset time after we receive the response. This ensures that our time is not smaller
+            // than the server's reset time
+            reset = Clock.System.now() + refillPeriod
+        }
+
+        return retry && response.shouldRetry()
+    }
 
     private suspend fun HttpResponse.shouldRetry(): Boolean =
         when (status) {
@@ -77,4 +89,8 @@ internal class DefaultHttpRequestThrottler(
 
             else -> false
         }
+
+    companion object {
+        private val ResetAttribute = AttributeKey<Instant>("DefaultHttpRequestThrottler.reset")
+    }
 }

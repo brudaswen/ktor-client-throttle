@@ -41,7 +41,7 @@ internal class ThrottleIntegrationTest {
     }
 
     @Test
-    fun `client should not fail if refillPeriod is large enough`() = runBlocking {
+    fun `client should not fail if client refillPeriod is aligned with server`() = runBlocking {
         server.startSuspend()
 
         val client = HttpClient(CIO) {
@@ -50,7 +50,7 @@ internal class ThrottleIntegrationTest {
             install(HttpRequestThrottle) {
                 throttler(
                     limit = 5,
-                    refillPeriod = 3.seconds,
+                    refillPeriod = 2.seconds,
                     retry = false,
                 )
             }
@@ -85,7 +85,7 @@ internal class ThrottleIntegrationTest {
             install(HttpRequestThrottle) {
                 throttler(
                     limit = 5,
-                    refillPeriod = 2.seconds,
+                    refillPeriod = 1.seconds,
                     retry = true,
                 )
             }
