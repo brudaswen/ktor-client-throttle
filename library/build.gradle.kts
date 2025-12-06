@@ -81,8 +81,8 @@ publishing {
 
                 licenses {
                     license {
-                        name = "The MIT License (MIT)"
-                        url = "https://mit-license.org/"
+                        name = "MIT License"
+                        url = "https://opensource.org/license/mit/"
                     }
                 }
                 developers {
